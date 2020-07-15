@@ -6,7 +6,7 @@ ________________________________________________________________________________
 
 Description :
 
-1. A Library Console Application:
+ A Library Console Application:
 
 You should be able to View all Books
 You should be able to Add a Book
