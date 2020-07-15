@@ -12,15 +12,16 @@ namespace Phils_Library
         public static Library<Book> Library { get; set; }
         public static List<Book> BookBag { get; set; }
 
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
 
+            UserInterface();
 
             Library = new Library<Book>();
 
             BookBag = new List<Book>();
-
 
         }
 
@@ -37,17 +38,6 @@ namespace Phils_Library
 
 
 
-        /*
-         * 
-         * View all Books
-            Add a Book
-            Borrow a book
-            Return a book
-            View Book Bag
-            Exit
-                      
-         * 
-         */
 
         public static void UserInterface()
         {
@@ -65,7 +55,6 @@ namespace Phils_Library
 
                     if (option == "1")
                     {
-
                     }
                     else if (option == "2")
                     {
