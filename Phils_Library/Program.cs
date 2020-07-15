@@ -1,12 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 namespace Phils_Library
 {
-    class Program
+    public class Program
     {
+
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
         }
+
+        static void LibraryRulez()
+        {
+           Library<Book> myLibrary = new Library<Book>();
+         }
     }
 }
+
+
