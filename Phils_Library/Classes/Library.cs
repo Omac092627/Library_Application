@@ -3,66 +3,108 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Phils_Library
+namespace Phils_Library.Classes
 {
-    public class Library<Book> : IEnumerable<Book>
+    class Library<T> : IEnumerable
     {
+        T[] inventory = new T[10];
+        int count = 0;
 
-        Book[] items = new Book[5];
-        int count;
-
-
-        public void Add(Book item)
+        /// <summary>
+        /// Add a new item to the Library List
+        /// </summary>
+        /// <param name="book">The new object that needs to be added to the list</param>
+        public void Add(T book)
         {
-            // evaluate the length of items vs the count. 
-            if (count == items.Length)
+            if (count == inventory.Length)
             {
-                Array.Resize(ref items, items.Length * 2);
-            }
-            items[count++] = item;
-
-            //// if count = 3
-            //count++;  // output 3, and then incrament to 4
-            //++count; // incrament to 4, then output 4
-        }
-
-
-        // If something is enumerable (interface)
-        // you need an enumerator ("get enumerator"_
-        // to be able to enumerate through generic collections
-
-        public IEnumerator<Book> GetEnumerator()
-        {
-            for (int i = 0; i < count; i++)
-            {
-                // yield break
-                yield return items[i];
+                Array.Resize(ref inventory, inventory.Length * 2);
             }
 
+            inventory[count++] = book;
         }
 
+        public T Remove(T item)
+        {
+            int quarter = count - 1;
+            int tempcount = 0;
+            T[] temp;
+            T removedBook = default(T);
+
+            if (IsAvailable(item))
+            {
+                if (count < inventory.Length / 2)
+                {
+                    temp = new T[quarter];
+                }
+                else
+                {
+                    temp = new T[inventory.Length];
+                }
+
+                for (int i = 0; i < count; i++)
+                {
+                    if (inventory[i] != null)
+                    {
+                        if (!inventory[i].Equals(item))
+                        {
+                            temp[tempcount] = inventory[i];
+
+                            tempcount++;
+                        }
+                        else
+                        {
+                            removedBook = inventory[i];
+                        }
+                    }
+                }
+                inventory = temp;
+                count--;
+            }
+
+            return removedBook;
+        }
 
         public int Count()
         {
             return count;
         }
 
+        // Stretch goal
+        /// <summary>
+        /// This method checks to see if an item exists in the Library
+        /// </summary>
+        /// <param name="book">The book that is being searched</param>
+        /// <returns>True/False indicator if the book exists in the library</returns>
+        public bool IsAvailable(T book)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (inventory[i].Equals(book))
+                {
+                    return true;
+                }
+            }
 
+            return false;
+        }
 
-        // Foreach does not require IEnumerable
-        // Ienumerator only requires the GetEnumerator (non-generic)
-        // Non-generic getenumerator requires teh generic GetEnumerator
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < count; i++)
+            {
+                yield return inventory[i];
+            }
+        }
 
-        // Enumerable - means it can be iterated through
-        // Enumerator - is the actual "thing" that walks through the sequence through the list
+        // Magic Don't Touch
 
-        // Magic, don't touch.
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-
-    
     }
+
+
 
 }

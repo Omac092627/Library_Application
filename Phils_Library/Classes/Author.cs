@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Phils_Library
+namespace Phils_Library.Classes
 {
-    public class Author : Book
+     class Author 
     {
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public static implicit operator string(Author v)
-        {
-            throw new NotImplementedException();
-        }
+    
 
 
     }
