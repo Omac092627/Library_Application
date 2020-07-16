@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Phils_Library
 {
-    public class Library<T> : IEnumerable<T>
+    public class Library<Book> : IEnumerable<Book>
     {
 
-        T[] items = new T[5];
+        Book[] items = new Book[5];
         int count;
 
 
-        public void Add(T item)
+        public void Add(Book item)
         {
             // evaluate the length of items vs the count. 
             if (count == items.Length)
@@ -31,7 +31,7 @@ namespace Phils_Library
         // you need an enumerator ("get enumerator"_
         // to be able to enumerate through generic collections
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<Book> GetEnumerator()
         {
             for (int i = 0; i < count; i++)
             {
